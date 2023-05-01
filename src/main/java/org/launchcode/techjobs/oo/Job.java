@@ -25,7 +25,7 @@ public class Job {
         nextId++;
     }
 
-    public Job(int id, String aName, Employer anEmployer, Location aLocation, PositionType aPositionType, CoreCompetency aCoreCompetency) {
+    public Job(String aName, Employer anEmployer, Location aLocation, PositionType aPositionType, CoreCompetency aCoreCompetency) {
         this();
         this.name = aName;
         this.employer = anEmployer;
