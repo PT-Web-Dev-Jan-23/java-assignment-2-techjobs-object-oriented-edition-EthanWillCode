@@ -29,9 +29,27 @@ public class JobTest {
         assertTrue(tester.getPositionType() instanceof PositionType);
         assertTrue(tester.getCoreCompetency() instanceof CoreCompetency);
     }
+
+    @Test
     public void testJobsForEquality(){
         Job tester1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         Job tester2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        assertEquals(tester1.getId(),tester2.getId());
+        assertNotEquals(tester1.getId(),tester2.getId());
+    }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job tester3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String testerString = tester3.toString();
+        char firstChar = testerString.charAt(0);
+        char lastChar = testerString.charAt(testerString.length()-1);
+
+        assertEquals(lastChar, '\n');
+        assertEquals(firstChar, '\n');
+
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+
     }
 }
