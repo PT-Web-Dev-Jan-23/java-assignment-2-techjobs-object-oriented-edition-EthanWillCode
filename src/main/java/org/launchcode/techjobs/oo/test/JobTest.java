@@ -24,6 +24,12 @@ public class JobTest {
         Job tester = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
         assertEquals(tester.getName(),"Product tester");
+        assertEquals(tester.getEmployer().toString(),"ACME");
+        assertEquals(tester.getLocation().toString(),"Desert");
+        assertEquals(tester.getPositionType().toString(),"Quality control");
+        assertEquals(tester.getCoreCompetency().toString(),"Persistence");
+
+        assertTrue(tester.getName().equals("Product tester"));
         assertTrue(tester.getEmployer() instanceof Employer);
         assertTrue(tester.getLocation() instanceof Location);
         assertTrue(tester.getPositionType() instanceof PositionType);
@@ -35,6 +41,7 @@ public class JobTest {
         Job tester1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         Job tester2 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         assertNotEquals(tester1.getId(),tester2.getId());
+        assertFalse(tester1.equals(tester2));
     }
 
     @Test
@@ -50,6 +57,25 @@ public class JobTest {
     }
     @Test
     public void testToStringContainsCorrectLabelsAndData(){
+        Job tester8 = new Job("Product tester",
+                new Employer(""),
+                new Location("Desert"),
+                new PositionType("Quality control"),
+                new CoreCompetency("Persistence")
+        );
+        assertEquals(tester8.toString(), "\n" +
+                "ID: " + tester8.getId() + "\n" +
+                "Name: " + tester8.getName() + "\n" +
+                "Employer: " + tester8.getEmployer() + "\n" +
+                "Location: " + tester8.getLocation() + "\n" +
+                "Position Type: " + tester8.getPositionType() + "\n" +
+                "Core Competency: " + tester8.getCoreCompetency() + "\n");
 
+    }
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job tester7 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        tester7.toString();
+        assertEquals(tester7.getEmployer().toString(), "Data Not Available");
     }
 }
